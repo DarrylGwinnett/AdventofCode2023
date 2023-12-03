@@ -10,11 +10,10 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <None Remove="Data\Day1-input.txt" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Content Include="Data\Day1-input.txt">
+    <Content Include="Day2\Day2-input.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Day1\Day1-input.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
@@ -25,6 +24,10 @@
     <PackageReference Include="NUnit3TestAdapter" Version="4.2.1" />
     <PackageReference Include="NUnit.Analyzers" Version="3.6.1" />
     <PackageReference Include="coverlet.collector" Version="6.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Day3\" />
   </ItemGroup>
 
 </Project>

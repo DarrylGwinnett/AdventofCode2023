@@ -1,5 +1,4 @@
-
-namespace AdventOfCode
+namespace AdventOfCode.Day1
 {
     public class Tests
     {
@@ -20,19 +19,19 @@ namespace AdventOfCode
                 sum += SumOfFirstAndLastDigit(line);
             });
             Console.WriteLine(sum);
-   }
+        }
 
         private static int SumOfFirstAndLastDigit(string line)
         {
             var chars = line.ToCharArray().ToList();
             int first = 0;
-            chars.First(item => Int32.TryParse(item.ToString(), out first));
+            chars.First(item => int.TryParse(item.ToString(), out first));
 
             int last = 0;
-            chars.Last(item => Int32.TryParse(item.ToString(), out last));
+            chars.Last(item => int.TryParse(item.ToString(), out last));
 
             var sum = first.ToString() + last.ToString();
-            return Int32.Parse(sum);
+            return int.Parse(sum);
         }
 
     }

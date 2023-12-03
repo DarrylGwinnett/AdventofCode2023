@@ -3,7 +3,7 @@ using System.Globalization;
 using System.Text.RegularExpressions;
 using static System.Runtime.InteropServices.JavaScript.JSType;
 
-namespace AdventOfCode
+namespace AdventOfCode.Day1
 {
     public class Puzzle2
     {
@@ -55,7 +55,7 @@ namespace AdventOfCode
             });
             var lastWordResult = FindFirstWord(reversedLine!, reversedWordList);
 
-            var lastIndex = lastWordResult.Success && (lastWordResult.Index < lastNumResult.Index) ? lastWordResult.Number : lastNumResult.Number;
+            var lastIndex = lastWordResult.Success && lastWordResult.Index < lastNumResult.Index ? lastWordResult.Number : lastNumResult.Number;
             return lastIndex;
         }
 
@@ -63,7 +63,7 @@ namespace AdventOfCode
         {
             var firstWord = FindFirstWord(line, wordList);
             var firstNumber = FindFirstInteger(line);
-            var firstValue = firstWord.Success && (firstWord.Index < firstNumber.Index) ? firstWord.Number : firstNumber.Number;
+            var firstValue = firstWord.Success && firstWord.Index < firstNumber.Index ? firstWord.Number : firstNumber.Number;
             return firstValue;
         }
 
@@ -126,7 +126,7 @@ namespace AdventOfCode
             {
                 var reversed = Reverse(text);
                 index = Array.IndexOf(numberStrings, reversed);
-                if(index == -1) throw new InvalidDataException("Couldn't parse word " + text);
+                if (index == -1) throw new InvalidDataException("Couldn't parse word " + text);
                 return index;
             }
         }
