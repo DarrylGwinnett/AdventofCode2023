@@ -8,7 +8,7 @@ namespace AdventOfCode.Day1
     public class Puzzle2
     {
 
-        private string[] input = File.ReadAllLines("./Data/Day1-input.txt");
+        private string[] input = File.ReadAllLines("./Day1-input.txt");
         private List<string> wordList = new List<string>()
         {
             "one",

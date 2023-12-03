@@ -1,13 +1,13 @@
 ﻿namespace AdventOfCode.Day2
 {
-    public class Puzzle3
+    public class Puzzle4
     {
         [SetUp]
         public void Setup()
         {
         }
 
-        private string[] input = File.ReadAllLines("./Data/Day2-input.txt");
+        private string[] input = File.ReadAllLines("./Day2-input.txt");
         private const int redMax = 12;
         private const int blueMax = 14;
         private const int greenMax = 13;
@@ -19,12 +19,12 @@
             var lines = input.ToList();
             lines.ForEach(line =>
             {
-                sum += GetValidIds(line);
+                sum += GetCubePower(line);
             });
             Console.WriteLine(sum);
         }
 
-        private static int GetValidIds(string line)
+        private static int GetCubePower(string line)
         {
             var splitOnName = line.Split(':');
             var name = splitOnName[0];
@@ -42,13 +42,11 @@
             });
             var game = new Game()
             {
-                Rounds = rounds,
-                Name = name,
-                Id = int.Parse(id)
+                Rounds = rounds
 
             };
-            if (!game.IsValid()) return 0;
-            return game.Id;
+            var power = game.FewestRequiredGreens() * game.FewestRequiredBlues() * game.FewestRequiredReds();
+            return power;
 
         }
 
@@ -65,23 +63,36 @@
 
         public class Game
         {
-            public string Name { get; set; }
-
             public List<Round> Rounds { get; set; }
 
-            public int Id { get; set; }
-
-            public bool IsValid()
+            public int FewestRequiredGreens()
             {
-                return !HasExceededMaxColorCount(Rounds, round => round.Blue, blueMax) &&
-                       !HasExceededMaxColorCount(Rounds, round => round.Green, greenMax) &&
-                       !HasExceededMaxColorCount(Rounds, round => round.Red, redMax);
-            }
-            private bool HasExceededMaxColorCount(IEnumerable<Round> rounds, Func<Round, int> colorSelector, int max)
-            {
-                return rounds.Any(round => colorSelector(round) > max);
+                return GetFewestRequiredColor(Rounds, round => round.Green);
             }
 
+            public int FewestRequiredBlues()
+            {
+                return GetFewestRequiredColor(Rounds, round => round.Blue);
+            }
+
+            public int FewestRequiredReds()
+            {
+                return GetFewestRequiredColor(Rounds, round => round.Red);
+            }
+
+            private int GetFewestRequiredColor(IEnumerable<Round> rounds, Func<Round, int> colorSelector)
+            {
+                int fewestRequired = 0;
+                foreach (var round in rounds)
+                {
+                    int currentColorCount = colorSelector(round);
+                    if (currentColorCount > fewestRequired)
+                    {
+                        fewestRequired = currentColorCount;
+                    }
+                }
+                return fewestRequired;
+            }
         }
 
         public class Round
